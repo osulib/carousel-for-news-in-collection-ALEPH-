@@ -1,0 +1,93 @@
+<!DOCTYPE>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="carouselNews.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--navigation scripts-->
+<script type="text/javascript">
+
+function carouselMoveLeft() { //move first element as last
+  var bcd = document.querySelector('.bookCarousel div'); 
+  var articles = bcd.getElementsByTagName('article');
+  var firstA = articles [0];
+  var lastA = articles [ articles.length - 1 ];
+  lastA.parentNode.insertBefore( firstA, lastA.nextSibling);
+  }
+
+function carouselMoveRight() { //move last lement as first
+  var bcd = document.querySelector('.bookCarousel div'); 
+  var articles = bcd.getElementsByTagName('article');
+  var firstA = articles [0];
+  var lastA = articles [ articles.length - 1 ];
+  bcd.insertBefore( lastA, firstA );
+  }
+
+function carouselPause() {
+  var bcd = document.querySelector('.bookCarousel div');
+  bcd.style.WebkitAnimationPlayState='paused'; //paused, running
+  bcd.style.animationPlayState='paused';
+  }
+
+function carouselPlay() {
+  var bcd = document.querySelector('.bookCarousel div');
+  bcd.style.WebkitAnimationPlayState='running'; //paused, running
+  bcd.style.animationPlayState='running';
+  }  
+</script>
+
+  </head>
+  <body>
+  <div class="bookCarousel"/> 
+
+<script type="text/javascript"> 
+function createXMLHttpRequest() { 
+      if (typeof XMLHttpRequest != 'undefined') { return new XMLHttpRequest(); } 
+      else if (typeof ActiveXObject != 'undefined') { return new ActiveXObject('Microsoft.XMLHTTP'); } 
+      else { console.error('no AJAX/XHR method supported by your browser'); return null ; } 
+      } 
+
+var carouselAJAX=createXMLHttpRequest();
+carouselAJAX.onreadystatechange=function () { 
+   if( this.readyState==4 && this.status==200) {
+      var cdiv = document.createElement('div');
+      var data=this.responseXML;
+      var books = data.getElementsByTagName('book');
+      for (var i=0; i<books.length; i++) {
+         var carticle = document.createElement('article');
+         var canchor = document.createElement('a');
+         canchor.href = ( books[i].getElementsByTagName('linkUrl')[0] || document.createElement('span') ).textContent;
+         var cimage = document.createElement('img');
+         var imageFileName = ( books[i].getElementsByTagName('imageFileName')[0] || document.createElement('span') ).textContent;
+         var title = ( books[i].getElementsByTagName('title')[0] || document.createElement('span') ).textContent;  
+         cimage.src = imageFileName;
+         cimage.setAttribute('alt', ''); //alt might be useful, if image is not loaded
+					 // however, this alt text is shown until the image is loaded, which is intursive
+         cimage.setAttribute('title', title);
+         canchor.appendChild(cimage);
+         carticle.appendChild(canchor);
+         cdiv.appendChild(carticle);
+         }
+      document.querySelector('.bookCarousel').appendChild(cdiv);
+         
+      //navigation
+      var navigationBar=document.createElement('div')
+      navigationBar.innerHTML = '<a href="javascript:void(0);" onclick="carouselMoveLeft();" style="float:left;" >fast_rewind</a>';
+      navigationBar.innerHTML += '<a href="javascript:void(0);" onclick="carouselPause();" style="margin-left: 45%; font-size: 80%;" title="Pause"><b>pause</b></a>';
+      navigationBar.innerHTML += '<a href="javascript:void(0);" onclick="carouselPlay();" style="margin-left: 1em; font-size: 80%; font-weight: bold;" title="Play">play_arrow</a>';
+      navigationBar.innerHTML += '<a href="javascript:void(0);" onclick="carouselMoveRight();" style="float:right;">fast_forward</a>';
+      
+      navigationBar.classList.add('carouselNavigationBar');
+      navigationBar.classList.add('material-icons');
+      document.querySelector('.bookCarousel').parentNode.appendChild(navigationBar);
+      
+      }
+   }      
+carouselAJAX.open('GET','carousel.xml');
+carouselAJAX.send();
+</script>
+
+
+  </body>
+</html>
+
