@@ -183,7 +183,7 @@ printf "     }\n\n" >>$cssFile
 
 echo '.bookCarousel {' >>$cssFile
 set elementWidth = `echo 'printf ("%.0f", '$carouselWidth' * '$coverWidth' * 1.2 )' | perl`
-set elementHeight = `echo 'printf ("%.0f", '$coverWidth' * 1.7  )' | perl`
+set elementHeight = `echo 'printf ("%.0f", '$coverWidth' * 2.2  )' | perl`
 echo "   width: $elementWidth""px;" >>$cssFile
 echo "   max-width: $elementWidth""px;" >>$cssFile
 echo "   height: $elementHeight""px;" >>$cssFile
