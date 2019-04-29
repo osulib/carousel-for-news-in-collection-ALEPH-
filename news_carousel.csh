@@ -183,7 +183,7 @@ printf "     }\n\n" >>$cssFile
 
 echo '.bookCarousel {' >>$cssFile
 set elementWidth = `echo 'printf ("%.0f", '$carouselWidth' * '$coverWidth' * 1.2 )' | perl`
-set elementHeight = `echo 'printf ("%.0f", '$coverWidth' * 2.2  )' | perl`
+set elementHeight = `echo 'printf ("%.0f", '$coverWidth' * 1.7  )' | perl`
 echo "   width: $elementWidth""px;" >>$cssFile
 echo "   max-width: $elementWidth""px;" >>$cssFile
 echo "   height: $elementHeight""px;" >>$cssFile
@@ -195,11 +195,13 @@ set totalTime = `echo 'printf ("%.0f", '$noOfBooks' * ( '$slidingTime' + '$delay
 echo "   animation: carousel $totalTime""s infinite;  /* this works also in IE11*/" >>$cssFile
 echo '  /*animation: carousel var(--totalTime) infinite; # this does not work in IE11*/' >>$cssFile
 echo '  /*animation: carousel calc( 20s * 2 * 3 ) infinite;  #this calc() does not work in IE 11 */' >>$cssFile
+set positionTop  = `echo 'printf ("%.0f", 0 - ( '$coverWidth' * 0.46 ) )' | perl` 
+echo "  position: relative; top: $positionTop""px;" >>$cssFile 
 printf "     }\n\n" >>$cssFile
 
 echo '.bookCarousel article {' >>$cssFile
 set widthWithMargins = `echo 'printf ("%.0f", '$coverWidth' * 1.2 )' | perl`
-echo "   width: $widthWithMargins""px" >>$cssFile
+echo "   width: $widthWithMargins""px;" >>$cssFile 
 printf "     }\n\n" >>$cssFile
 
 echo '.carouselNavigationBar {' >>$cssFile
