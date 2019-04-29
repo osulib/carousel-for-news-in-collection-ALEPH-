@@ -57,6 +57,7 @@ carouselAJAX.onreadystatechange=function () {
          var carticle = document.createElement('article');
          var canchor = document.createElement('a');
          canchor.href = ( books[i].getElementsByTagName('linkUrl')[0] || document.createElement('span') ).textContent;
+	 canchor.setAttribute('target','_parent'); //if carousel is nested in iframe or object element, link should go to whole page
          var cimage = document.createElement('img');
          var imageFileName = ( books[i].getElementsByTagName('imageFileName')[0] || document.createElement('span') ).textContent;
          var title = ( books[i].getElementsByTagName('title')[0] || document.createElement('span') ).textContent;  
