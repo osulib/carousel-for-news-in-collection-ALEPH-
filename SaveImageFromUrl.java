@@ -62,8 +62,8 @@ public class SaveImageFromUrl {  //donwload and save image or any file from URL
 		is.close();
 		os.close();
     
-    //resize
-    if ( this.width != 0 ) {
+    //resize if final width is less than 200px
+    if ( this.width != 0 && this.width < 200) {
         BufferedImage originalImage = ImageIO.read(new File(this.destinationFile));
 	    	int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
         if ( this.height == 0 ) { //no height as argument, get it from image
