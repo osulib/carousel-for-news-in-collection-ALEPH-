@@ -196,7 +196,7 @@ echo "   animation: carousel $totalTime""s infinite;  /* this works also in IE11
 echo '  /*animation: carousel var(--totalTime) infinite; # this does not work in IE11*/' >>$cssFile
 echo '  /*animation: carousel calc( 20s * 2 * 3 ) infinite;  #this calc() does not work in IE 11 */' >>$cssFile
 set positionTop  = `echo 'printf ("%.0f", 0 - ( '$coverWidth' * 0.46 ) )' | perl` 
-echo "  position: relative; top: $positionTop""px;" >>$cssFile 
+#echo "  position: relative; top: $positionTop""px;" >>$cssFile  #this can be used (uncommented) to avoid white space between covers and navigation buttons - if this problem occurs.
 printf "     }\n\n" >>$cssFile
 
 echo '.bookCarousel article {' >>$cssFile
