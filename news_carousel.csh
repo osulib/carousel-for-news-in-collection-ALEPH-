@@ -25,43 +25,54 @@ set searchMode=''; #ccl or file
 set searchInput=''; #ccl query or file name
 set outputDir='';
 set lastArgv='';
-foreach a ($argv)
-   set a2 = `echo "$a" | sed 's/^-*//'`
-   switch ($a2)
+
+set i=1
+while ( $i <= $#argv )
+   set a2 = "$argv[$i]"
+
+echo "argument: $a2"
+   set a2 = `echo "$a2"`
+   set a2 = `echo "$a2" | sed 's/^\-//'`
+echo "     after process: $a2"
+
+   switch ("$a2")
       case 'ccl':
-	 set searchMode = 'ccl';
+         set searchMode = 'ccl';
          set lastArgv = 'ccl';
-	 breaksw;
+         breaksw;
       case 'f':
-	 set searchMode = 'f';
+         set searchMode = 'f';
          set lastArgv = 'f';
-	 breaksw;
+         breaksw;
       case 'file':
-	 set searchMode = 'f';
+         set searchMode = 'f';
          set lastArgv = 'f';
-	 breaksw;
+         breaksw;
       case 'o':
          set lastArgv = 'o';
-	 breaksw;
+         breaksw;
       case 'output':
          set lastArgv = 'o';
-	 breaksw;
+         breaksw;
       case 'h':
          goto help;
-	 breaksw;
+         breaksw;
       case 'help':
          goto help;
-	 breaksw;
+         breaksw;
       default:
-	 if ( "$lastArgv" == 'ccl' || "$lastArgv" == 'f' ) then
-	    set searchInput = $a;
-	 else if ( "$lastArgv" == 'o' ) then
-	    set outputDir = $a;
-	 endif
-	 set lastArgv = '';
-	 breaksw;
+         if ( "$lastArgv" == 'ccl' || "$lastArgv" == 'f' ) then
+            set searchInput = "$a2"
+         else if ( "$lastArgv" == 'o' ) then
+            set outputDir = "$a2"
+         endif
+         set lastArgv = '';
+         breaksw;
    endsw
+   @ i++
 end
+
+
 
 #arguments check
 if ( "$searchMode" == '' ) then
