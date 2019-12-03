@@ -123,7 +123,7 @@ endif
 
 #retrieve records in marcxml using p_print_03
 printf "\nExporting records - running p_print_03...\n\n"
-csh -f $aleph_proc/p_print_03 "MVK01,carouselnews.sys,ALL,,,,,,,,carouselnews.xml,X2,,,,N,"
+csh -f $aleph_proc/p_print_03 "$bibBase,carouselnews.sys,ALL,,,,,,,,carouselnews.xml,X2,,,,N,"
 #check results
 if ( ! -f "$alephe_dev/$bibBaseLower/scratch/carouselnews.xml" ) then
   printf "Error - output file from export (p_print_03) $alephe_dev/$bibBaseLower/scratch/carouselnews.xml not found. Something went wrong\nexiting...\n"
