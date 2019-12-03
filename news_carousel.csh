@@ -102,7 +102,7 @@ if ( "$searchMode" == 'f' ) then
    echo "There were `grep $ -c $alephe_scratch/carouselnews.sys` records found and prepared for procession"
 #run ccl query using p_ret_03
 else if ( "$searchMode" == 'ccl' ) then
-   if ( $searchInput == '' ) then
+   if ( "$searchInput" == '' ) then
       printf "Error - you have specified -ccl mode, but no CCL query set after the -ccl argument. Run with -h or --help to see more.\nexiting...\n"
       exit 1
    endif
