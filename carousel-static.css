@@ -13,6 +13,7 @@
 .bookCarousel article {  
   border: 0;
   text-align: center;
+  vertical-align: top; /*correction 20221222 - book covers has been party hidden on the bottom side, align them to the top*/
   display: inline-block;
   margin-bottom: 999px; /* to avoid displaying second line in the carousel*/
   }
