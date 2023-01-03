@@ -95,7 +95,8 @@ public class CarouselNews{
 			continue; } 
 
 		   //generate url to API
-		   String url = "http://" + obalkyKnihFrontEnd + "/api/books?multi=";
+		   // 20220103 protocol changed to https - https://github.com/osulib/carousel-for-news-in-collection-ALEPH-/issues/1	
+		   String url = "https://" + obalkyKnihFrontEnd + "/api/books?multi=";
 		   String url2 = "";
                    for ( int j=0; j<isbns.size(); j++ ) {
 		      String isbnx = isbns.get(j).toString();
