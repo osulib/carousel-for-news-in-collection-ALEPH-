@@ -16,19 +16,19 @@
 outputDir='/exlibris/aleph/u23_1/alephe/apache/htdocs/carousel'
 /exlibris/aleph/matyas/carousel/news_carousel.csh -ccl "wdr=`date '+%Y%m%d' --date='7 days ago'`->`date '+%Y%m%d'` not wps=Ve zpracovani not wbs=bookp*" -o $outputDir
 resultCount=0
-if [ -s $outputDir/carousel.xml]; then
+if [ -s $outputDir/carousel.xml ]; then
    resultCount=`xmllint --xpath 'count(//book)' $outputDir/carousel.xml`
 fi
 if [ $resultCount -lt 8 ]; then #try 14 days
    echo WARNING - LESS THAN 8 RESULT FOUND, SEEKING 14 DAYS BACK
    /exlibris/aleph/matyas/carousel/news_carousel.csh -ccl "wdr=`date '+%Y%m%d' --date='14 days ago'`->`date '+%Y%m%d'` not wps=Ve zpracovani not wbs=bookp*" -o $outputDir
-   if [ -s $outputDir/carousel.xml]; then
+   if [ -s $outputDir/carousel.xml ]; then
       resultCount=`xmllint --xpath 'count(//book)' $outputDir/carousel.xml`
    fi
    if [  $resultCount -lt 8 ]; then #try 21 days
       echo WARNING - LESS THAN 8 RESULT FOUND, SEEKING 21 DAYS BACK
       /exlibris/aleph/matyas/carousel/news_carousel.csh -ccl "wdr=`date '+%Y%m%d' --date='21 days ago'`->`date '+%Y%m%d'` not wps=Ve zpracovani not wbs=bookp*" -o $outputDir
-      if [ -s $outputDir/carousel.xml]; then
+      if [ -s $outputDir/carousel.xml ]; then
          resultCount=`xmllint --xpath 'count(//book)' $outputDir/carousel.xml`
       fi
       if [  $resultCount -lt 8 ]; then #try a month
